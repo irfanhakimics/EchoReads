@@ -23,7 +23,6 @@ html, body {
   scroll-behavior: smooth;
   overflow-y: scroll;
 
-  /* Hide native scrollbars */
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -33,7 +32,7 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-/* ✅ TOPBAR - now non-sticky */
+/* ✅ Sticky Topbar */
 .topbar {
   background-color: var(--lavender);
   color: white;
@@ -44,11 +43,19 @@ body::-webkit-scrollbar {
   font-size: 0.85rem;
   height: 40px;
   line-height: 1;
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 1001;
 }
 
-/* NAVIGATION - remains sticky */
+.topbar a {
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+  font-weight: 500;
+}
+
+/* ✅ Sticky Navbar below Topbar */
 nav {
   background-color: #181825;
   display: flex;
@@ -56,7 +63,7 @@ nav {
   align-items: center;
   padding: 20px;
   position: sticky;
-  top: 0;
+  top: 40px; /* 👈 Appears below .topbar */
   z-index: 1000;
 }
 
@@ -88,7 +95,7 @@ nav ul li a.active {
   color: #181825;
 }
 
-/* HERO SECTION */
+/* Hero Section (Home only) */
 .hero {
   background: linear-gradient(90deg, #101022, #1e1e3a);
   display: flex;
@@ -155,7 +162,7 @@ nav ul li a.active {
   border-color: var(--lavender);
 }
 
-/* SCROLL SECTION */
+/* Scroll Sections */
 .scroll-section {
   height: 100vh;
   width: 100vw;
@@ -167,6 +174,7 @@ nav ul li a.active {
   margin: 0;
 }
 
+/* Slide Content */
 .slide-inner {
   width: 100%;
   max-width: 800px;
@@ -175,7 +183,7 @@ nav ul li a.active {
   text-align: center;
 }
 
-/* LISTS */
+/* Lists */
 ul {
   list-style-position: inside;
   text-align: center;
@@ -189,7 +197,7 @@ li {
   line-height: 1.7;
 }
 
-/* DOT NAVIGATION */
+/* Dot Navigation */
 .scroll-indicator {
   position: fixed;
   right: 20px;
@@ -218,7 +226,7 @@ li {
   background-color: var(--matcha);
 }
 
-/* FOOTER */
+/* Footer */
 footer {
   background-color: #181825;
   color: #999;

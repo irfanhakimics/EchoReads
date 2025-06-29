@@ -75,7 +75,7 @@
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background-color: #ccc;
+      background-color: #a68ebd;
       transition: background-color 0.3s, transform 0.3s;
     }
 
@@ -84,7 +84,8 @@
     }
 
     .scroll-indicator .dot.active {
-      background-color: var(--matcha);
+      background-color: #da00ff; /* Neon purple */
+  box-shadow: 0 0 8px #da00ff, 0 0 16px #da00ff; /* Glow effect */
     }
 
     main {
@@ -167,26 +168,35 @@
   <footer>
     &copy; 2025 EchoReads. Built by CDIM2446A (UiTM).
   </footer>
+<script>
+  const dots = document.querySelectorAll('.scroll-indicator .dot');
+  const sections = document.querySelectorAll('.scroll-section');
 
-  <script>
-    const dots = document.querySelectorAll('.scroll-indicator .dot');
-    const sections = document.querySelectorAll('.scroll-section');
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.6  // 60% of section in view to trigger
+  };
 
-    const updateActiveDot = () => {
-      let index = 0;
-      sections.forEach((section, i) => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= window.innerHeight * 0.45) {
-          index = i;
-        }
-      });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const index = Array.from(sections).indexOf(entry.target);
+        dots.forEach(dot => dot.classList.remove('active'));
+        if (dots[index]) dots[index].classList.add('active');
+      }
+    });
+  }, observerOptions);
 
-      dots.forEach(dot => dot.classList.remove('active'));
-      if (dots[index]) dots[index].classList.add('active');
-    };
+  sections.forEach(section => observer.observe(section));
 
-    window.addEventListener('scroll', updateActiveDot);
-    window.addEventListener('load', updateActiveDot);
-  </script>
+  // Smooth scroll on dot click
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', e => {
+      e.preventDefault();
+      sections[i].scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
 </body>
 </html>

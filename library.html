@@ -19,6 +19,10 @@
       overflow-y: auto;
     }
 
+    nav {
+      margin-top: 40px; /* ✅ Push nav below topbar */
+    }
+
     .scroll-section {
       height: 100vh;
       scroll-snap-align: start;
@@ -74,7 +78,7 @@
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background-color: #ccc;
+      background-color: #a68ebd;
       transition: background-color 0.3s, transform 0.3s;
     }
 
@@ -83,7 +87,8 @@
     }
 
     .scroll-indicator .dot.active {
-      background-color: var(--matcha);
+      background-color: #da00ff; /* Neon purple */
+  box-shadow: 0 0 8px #da00ff, 0 0 16px #da00ff; /* Glow effect */
     }
 
     main {
@@ -100,6 +105,8 @@
   </style>
 </head>
 <body>
+
+  <!-- ✅ Fixed Topbar -->
   <div class="topbar">
     <div>📅 Open: Mon–Fri, 9am–6pm</div>
     <div>
@@ -108,6 +115,7 @@
     </div>
   </div>
 
+  <!-- Navigation -->
   <nav>
     <div class="logo">EchoReads</div>
     <ul>
@@ -129,6 +137,7 @@
     <a href="#lib4" class="dot"></a>
   </div>
 
+  <!-- Content Sections -->
   <main>
     <section class="scroll-section" id="lib1">
       <div class="slide-inner">
@@ -168,29 +177,42 @@
     </section>
   </main>
 
+  <!-- Footer -->
   <footer>
     &copy; 2025 EchoReads. Built by CDIM2446A (UiTM).
   </footer>
 
+  <!-- Dot Scroll Script -->
   <script>
-    const dots = document.querySelectorAll('.scroll-indicator .dot');
-    const sections = document.querySelectorAll('.scroll-section');
+  const dots = document.querySelectorAll('.scroll-indicator .dot');
+  const sections = document.querySelectorAll('.scroll-section');
 
-    const updateActiveDot = () => {
-      let index = 0;
-      sections.forEach((section, i) => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= window.innerHeight * 0.45) {
-          index = i;
-        }
-      });
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.6  // 60% of section in view to trigger
+  };
 
-      dots.forEach(dot => dot.classList.remove('active'));
-      if (dots[index]) dots[index].classList.add('active');
-    };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const index = Array.from(sections).indexOf(entry.target);
+        dots.forEach(dot => dot.classList.remove('active'));
+        if (dots[index]) dots[index].classList.add('active');
+      }
+    });
+  }, observerOptions);
 
-    window.addEventListener('scroll', updateActiveDot);
-    window.addEventListener('load', updateActiveDot);
-  </script>
+  sections.forEach(section => observer.observe(section));
+
+  // Smooth scroll on dot click
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', e => {
+      e.preventDefault();
+      sections[i].scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
 </body>
 </html>
