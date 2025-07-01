@@ -36,10 +36,13 @@
     <a href="read-play.html" class="back-button">⬅ Back</a>
 
     <!-- ✅ MindAR Scene -->
- <a-scene>
-  <a-box position="0 0 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-  <a-camera></a-camera>
-</a-scene>
+<a-scene 
+  mindar-image="imageTargetSrc: targets.mind; autoStart: true;"
+  device-orientation-permission-ui="enabled: true"
+  embedded
+  renderer="colorManagement: true, physicallyCorrectLights"
+  vr-mode-ui="enabled: false"
+>
 
       <a-assets></a-assets>
 
