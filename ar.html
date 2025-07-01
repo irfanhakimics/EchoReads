@@ -1,75 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>EchoReads AR</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- A-Frame & MindAR -->
-  <script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.7/dist/mindar-image-aframe.prod.js"></script>
-
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background-color: #000;
-      font-family: 'Comic Sans MS', cursive;
-    }
-
-    .back-button {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      background: #ffb997;
-      color: #fff;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: none;
-      z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      transition: background 0.3s ease;
-    }
-
-    .back-button:hover {
-      background: #ff9f9f;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- 🔙 Back Button -->
-  <a href="read-play.html" class="back-button">⬅ Back</a>
-
-  <!-- 🧠 MindAR AR Scene -->
-  <a-scene
-    mindar-image="imageTargetSrc: targets.mind; autoStart: true;"
-    color-space="sRGB"
-    embedded
-    renderer="colorManagement: true, physicallyCorrectLights"
-    vr-mode-ui="enabled: false"
-    device-orientation-permission-ui="enabled: true"
-  >
-
-    <!-- 📦 Assets (e.g., 3D models, sounds) -->
-    <a-assets>
-      <!-- Add glTF models or textures here -->
-    </a-assets>
-
-    <!-- 🎥 Camera -->
-    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
-    <!-- 🧊 Tracked Object -->
-    <a-entity mindar-image-target="targetIndex: 0">
-      <a-box position="0 0 0"
-             rotation="0 45 0"
-             animation="property: rotation; to: 0 360 0; loop: true; dur: 4000"
-             material="color: #ff6f61; opacity: 0.9; metalness: 0.5;">
-      </a-box>
-    </a-entity>
-
-  </a-scene>
-</body>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body>
+    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-plane color="blue" opaciy="0.5" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+      </a-entity>
+    </a-scene>
+  </body>
 </html>
