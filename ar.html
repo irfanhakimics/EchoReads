@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>EchoReads AR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- MindAR & A-Frame CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.7/dist/mindar-image-aframe.prod.js"></script>
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: sans-serif;
+      background-color: #000;
+    }
+    .back-button {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: #fff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="read-play.html" class="back-button">⬅ Back</a>
+
+  <!-- AR Scene -->
+  <a-scene mindar-image="imageTargetSrc: marker.mind; autoStart: true;" 
+           color-space="sRGB"
+           embedded
+           vr-mode-ui="enabled: false"
+           device-orientation-permission-ui="enabled: true">
+
+    <a-assets>
+      <!-- You can replace this cube with a GLTF model later -->
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <a-entity mindar-image-target="targetIndex: 0">
+      <!-- Replace this cube with your own 3D object -->
+      <a-box position="0 0 0" material="color: red;" depth="0.1" height="0.1" width="0.1"></a-box>
+    </a-entity>
+  </a-scene>
+</body>
+</html>
